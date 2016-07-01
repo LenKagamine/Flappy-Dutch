@@ -5,8 +5,9 @@ import java.awt.image.BufferedImage;
 public class Medal{
 	private BufferedImage[] sprites;
 	private int type; //-1 = none, 0 = bronze, 1 = silver, 2 = gold, 3 = platinum
-	private double x,y;
-	private int width,height;
+	private double x, y;
+	private int width, height;
+	
 	public Medal(String s){
 		try{
 			BufferedImage spritesheet = ImageIO.read(getClass().getResourceAsStream(s));
@@ -20,11 +21,11 @@ public class Medal{
 		}
 	}
 	
-	public void draw(Graphics2D g,boolean draw){
+	public void draw(Graphics2D g, boolean draw){
 		if(draw && type >= 0) g.drawImage(sprites[type],(int)x,(int)y,null);
 	}
 	
-	public void setPosition(double x,double y){
+	public void setPosition(double x, double y){
 		this.x = x;
 		this.y = y;
 	}

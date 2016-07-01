@@ -68,7 +68,7 @@ public class Player{
 		y += dy;
 	}
 	
-	public void draw(Graphics2D g){
+	public void draw(Graphics2D g, boolean debug){
 		int drawX = (int) (x-width/2);
 		int drawY = (int) (y-height/2);
 		double rot = Math.toRadians(angle);
@@ -77,6 +77,8 @@ public class Player{
 		AffineTransform tx = AffineTransform.getRotateInstance(rot, locX, locY);
 		AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
 		g.drawImage(op.filter(sprite, null), drawX, drawY, null);
+		
+		if(debug) g.drawRect((int)x+2,(int)y-10,width/2-2,height/2);
 	}
 	
 	public void setPosition(double x,double y){

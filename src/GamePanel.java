@@ -20,6 +20,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 		setFocusable(true);
 		requestFocus();
 	}
+	
 	public void addNotify(){
 		super.addNotify();
 		if(thread == null){
@@ -29,6 +30,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 			thread.start();
 		}
 	}
+	
 	public void run(){
 		image = new BufferedImage(WIDTH,HEIGHT,BufferedImage.TYPE_INT_RGB);
 		g = (Graphics2D) image.getGraphics();
@@ -56,12 +58,15 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 			}
 		}
 	}
+	
 	public void update(){
 		level.update();
 	}
+	
 	private void draw(){
 		level.draw(g);
 	}
+	
 	private void drawToScreen(){
 		Graphics g2 = getGraphics();
 		g2.drawImage(image,0,0,WIDTH*SCALE,HEIGHT*SCALE,null);

@@ -23,7 +23,7 @@ public class Level{
 	private Button scoreboard;
 	private Button newscore;
 	private Button start;
-	private Button credits;
+	private Button exit;
 	private Button retry;
 	private Button menu;
 
@@ -31,8 +31,10 @@ public class Level{
 
 	private int state;
 	private boolean highscore;
+	private boolean debug;
+	
 	public Level(){
-		state = 0; //0 = main menu; 1 = get ready; 2 = playing; 3 = dead+score; 4 = credits
+		state = 0; //0 = main menu; 1 = get ready; 2 = playing; 3 = dead+score
 
 		try{
 			bg = ImageIO.read(getClass().getResourceAsStream("background.png"));
@@ -82,8 +84,8 @@ public class Level{
 		start = new Button("start.png");
 		start.setPosition(GamePanel.WIDTH/2-25, 150);
 
-		credits = new Button("credits.png");
-		credits.setPosition(GamePanel.WIDTH/2+25, 150);
+		exit = new Button("exit.png");
+		exit.setPosition(GamePanel.WIDTH/2+25, 150);
 
 		retry = new Button("ok.png");
 		retry.setPosition(GamePanel.WIDTH/2-25, 175);
@@ -97,6 +99,7 @@ public class Level{
 		startTime = 0;
 		delay = 1200;
 		highscore = false;
+		debug = false;
 	}
 
 	private void checkCollisions(){
@@ -152,15 +155,16 @@ public class Level{
 			}
 		}
 	}
+	
 	public void draw(Graphics2D g){
 		g.drawImage(bg, 0, 0, null);
 		for(int i = 0; i < pipes.size(); i++) pipes.get(i).draw(g);
 		ground.draw(g);
-		player.draw(g);
+		player.draw(g, debug);
 
 		flappybird.draw(g, state == 0);
 		start.draw(g, state == 0);
-		credits.draw(g, state == 0);
+		exit.draw(g, state == 0);
 
 		getready.draw(g, state == 1);
 		counter.draw(g, state == 1 || state == 2);
@@ -174,6 +178,7 @@ public class Level{
 		bestscore.draw(g, state == 3);
 		medal.draw(g, state == 3);
 	}
+	
 	public void keyPressed(int k){
 		if(k == KeyEvent.VK_SPACE){
 			if(state == 1){
@@ -183,13 +188,19 @@ public class Level{
 			else if(state == 2) player.setFlapping();
 		}
 	}
+	
 	public void keyReleased(int k){
 		if(k == KeyEvent.VK_SPACE && state == 2) player.resetFlapping();
+		if(k == KeyEvent.VK_D) debug = !debug;
 	}
+	
 	public void mouseReleased(Point p){
 		if(state == 0){
 			if(start.clicked(p)){
 				state = 1;
+			}
+			if(exit.clicked(p)){
+				System.exit(1);
 			}
 		}
 		if(player.getDead()){

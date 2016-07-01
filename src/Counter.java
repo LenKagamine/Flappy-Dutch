@@ -7,6 +7,7 @@ public class Counter{
 	private int counter;
 	private double x, y;
 	private int width, height;
+	
 	public Counter(String s){
 		counter = 0;
 		try{
@@ -42,16 +43,19 @@ public class Counter{
 		this.y = y;
 	}
 
+	public int getCounter(){
+		return counter;
+	}
+	
 	public void changeCounter(int counter){
 		this.counter = counter;
 	}
+	
 	public void addCounter(){
 		counter++;
 	}
+	
 	public void resetCounter(){
 		counter = 0;
-	}
-	public int getCounter(){
-		return counter;
 	}
 }

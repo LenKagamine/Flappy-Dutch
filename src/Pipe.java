@@ -19,6 +19,7 @@ public class Pipe{
 		counted = false;
 		sprite = s;
 	}
+	
 	public Rectangle getRect(){
 		return new Rectangle((int) x, (int) y, width, height);
 	}
@@ -35,6 +36,7 @@ public class Pipe{
 	public Rectangle getTopBounds(){
 		return new Rectangle((int) x+1, (int) y, width-3, 125);
 	}
+	
 	public Rectangle getBottomBounds(){
 		return new Rectangle((int) x+1, (int) y+177, width-3, 121);
 	}
